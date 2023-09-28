@@ -21,7 +21,7 @@ public class SesEmailSender implements EmailSenderGateway {
     @Override
     public void sendEmail(String to, String subject, String body) {
         SendEmailRequest request = new SendEmailRequest()
-                .withSource("pedroandrade2004@gmail.com")
+                .withSource("pedroandrade202004@gmail.com")
                 .withDestination(new Destination().withToAddresses(to))
                 .withMessage(new Message()
                         .withSubject(new Content(subject))
@@ -30,6 +30,7 @@ public class SesEmailSender implements EmailSenderGateway {
         try {
             this.amazonSimpleEmailService.sendEmail(request);
         } catch(AmazonServiceException exception) {
+            System.out.println(exception);
             throw new EmailServiceException("Failure while sending email", exception);
         }
     }
